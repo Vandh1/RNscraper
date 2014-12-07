@@ -115,7 +115,7 @@ def writeToDB():
         startPostData = startsMetadata[server];
         serverDate = serverStarts[server];
         startDate = convertDate(serverDate);
-        print(startDate);
+        #print(startDate);
         announcementDate = startPostData[1];
         query = "SELECT * FROM starts WHERE server = ?";
         c.execute(query, (server,));
@@ -128,10 +128,10 @@ def writeToDB():
             match = regexp.search(dbDate);
             (year, month, day) = match.group(1,2,3);
             dbDate = date(int(year),int(month),int(day));
-            if serverDate < dbDate:
+            if dbDate < serverDate:
                 c.execute("UPDATE starts SET startDate = ?, poster = ?, announcementDate = ? WHERE server = ?",(startDate, startPostData[0], announcementDate, server));
                 if logging:
-                    log.write(currentDate.strftime("%Y-%m-%d %H:%M:%S")+" Updated start time for "+server+"\n");
+                    log.write(currentDate.strftime("%Y-%m-%d %H:%M:%S")+" Updated start time for "+server+" +"serverDate+"\n");
             else:
                 if logging:
                     log.write(currentDate.strftime("%Y-%m-%d %H:%M:%S")+" DB already has the latest start date, nothing to do for "+server+"\n");
@@ -156,6 +156,7 @@ def getServerStartDate(threadNumber):
         (startDay, startMonth) = (match.group(1),match.group(2));
 
         startDate = date(currentDate.year, monthsPT[startMonth], int(startDay));
+
         return startDate; 
         
 def getThreadNumber(link):
@@ -218,12 +219,17 @@ def main():
                 continue;
             for datetag in tag.find_all('div', class_="author"):
                 (poster,day,month,year,hours,minutes) = getPostData(datetag.span.a['title']);
-                announcementDate = datetime(int(year),monthsEN[month],int(day),int(hours),int(minutes));
+               
+                try: #if the posting date is in "yesterday"/"today" format, value will be numeric
+                    month = int(month);
+                except ValueError: #otherwise it will be a string ie "December"
+                    month = monthsEN[month];
+                announcementDate = datetime(int(year), month,int(day),int(hours),int(minutes));
                 startsMetadata[serverName] = [poster,convertDate(announcementDate)];
                 threadNumber = getThreadNumber(tag.h3.a['href']);
                 startDate = getServerStartDate(threadNumber);
                 serverStarts[serverName] = startDate;
-                
+
         
     writeToDB();
 
