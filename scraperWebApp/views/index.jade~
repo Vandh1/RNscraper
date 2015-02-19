@@ -1,0 +1,81 @@
+
+
+//extends layout
+    
+//block content
+
+doctype html
+html
+    head
+      style(type="text/css").
+        body{ background-color: C0C0C0;}
+        table{border: 1px solid #333; }
+        th,td{border: 1px solid #666; padding: 0.5em; }
+    body
+      - function parseDate(date, addDays){
+      -   var parts = date.split("-");
+      -   var dt = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+      -   dt.setDate(dt.getDate()+addDays);
+      -   var month = dt.getMonth() +1;
+      -   var day = dt.getDate();
+      - if(day<10) day = "0"+day;
+      - if(month <10) month = "0"+month;
+      -   var dtStr = dt.getFullYear()+"-"+month+"-"+day;
+      -   return dtStr;
+      -}
+  
+      h1= title
+      p Welcome to Rail Nation PT/BR server starts page!
+      p Interrail West #{interrailwest[0].start}
+      p Interrail West 2 #{interrailwest2[0].start}
+      p Interrail West 3 #{interrailwest3[0].start}
+      p Golden Gate #{goldengate[0].start}
+      p Today is #{parseDate('2014-12-31', 14)};
+
+      table
+        tr
+          th Server
+          th Start
+          th Era 2
+          th Era 3
+          th Era 4
+          th Era 5
+          th Era 6
+          th Endgame
+        tr
+          td Interrail West
+          td #{interrailwest[0].start}
+          td #{parseDate(interrailwest[0].start,14)}
+          td #{parseDate(interrailwest[0].start,28)}
+          td #{parseDate(interrailwest[0].start,42)}
+          td #{parseDate(interrailwest[0].start,56)}
+          td #{parseDate(interrailwest[0].start,70)}
+          td #{parseDate(interrailwest[0].start,84)}
+        tr
+          td Interrail West 2
+          td #{interrailwest2[0].start}
+          td #{parseDate(interrailwest2[0].start,14)}
+          td #{parseDate(interrailwest2[0].start,28)}
+          td #{parseDate(interrailwest2[0].start,42)}
+          td #{parseDate(interrailwest2[0].start,56)}
+          td #{parseDate(interrailwest2[0].start,70)}
+          td #{parseDate(interrailwest2[0].start,84)}
+        tr
+          td Interrail West 3
+          td #{interrailwest3[0].start}
+          td #{parseDate(interrailwest3[0].start,14)}
+          td #{parseDate(interrailwest3[0].start,28)}
+          td #{parseDate(interrailwest3[0].start,42)}
+          td #{parseDate(interrailwest3[0].start,56)}
+          td #{parseDate(interrailwest3[0].start,70)}
+          td #{parseDate(interrailwest3[0].start,84)}
+
+        tr
+          td Golden Gate
+          td #{goldengate[0].start}
+          td #{parseDate(goldengate[0].start,14)}
+          td #{parseDate(goldengate[0].start,28)}
+          td #{parseDate(goldengate[0].start,42)}
+          td #{parseDate(goldengate[0].start,56)}
+          td #{parseDate(goldengate[0].start,70)}
+          td #{parseDate(goldengate[0].start,84)}
