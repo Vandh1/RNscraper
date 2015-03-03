@@ -131,7 +131,7 @@ def writeToDB():
             if dbDate < serverDate:
                 c.execute("UPDATE starts SET startDate = ?, poster = ?, announcementDate = ? WHERE server = ?",(startDate, startPostData[0], announcementDate, server));
                 if logging:
-                    log.write(currentDate.strftime("%Y-%m-%d %H:%M:%S")+" Updated start time for "+server+" +"serverDate+"\n");
+                    log.write(currentDate.strftime("%Y-%m-%d %H:%M:%S")+" Updated start time for "+server+" "+str(serverDate)+"\n");
             else:
                 if logging:
                     log.write(currentDate.strftime("%Y-%m-%d %H:%M:%S")+" DB already has the latest start date, nothing to do for "+server+"\n");
@@ -154,8 +154,12 @@ def getServerStartDate(threadNumber):
         regexp = re.compile(r'dia ([0-9]+) de ([Janeiro|Fevereiro|Março|Abril|Maio|Junho|Julho|Agosto|Setembro|Outubro|Novembro|Dezembro]+)');
         match = regexp.search(text);
         (startDay, startMonth) = (match.group(1),match.group(2));
-
-        startDate = date(currentDate.year, monthsPT[startMonth], int(startDay));
+        year = -1;
+        if monthsPT[startMonth] <= currentDate.month:
+            year = currentDate.year;
+        else:
+            year = currentDate.year-1;
+        startDate = date(year, monthsPT[startMonth], int(startDay));
 
         return startDate; 
         
@@ -239,9 +243,7 @@ def main():
     
 if  __name__ =='__main__':main()
 
-#make a cronjob of this!
-#Browser -> Perl -> Sqlite -> Perl -> Browser
-#http://forum.rail-nation.com/printthread.php?t=3421
+
 
 
 

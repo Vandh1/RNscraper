@@ -1,0 +1,7 @@
+doctype html
+html
+  head
+    title "Rail Nation Server Starts"
+    //link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    block content

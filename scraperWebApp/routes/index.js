@@ -13,16 +13,11 @@ router.get('/', function(req, res) {
 	interrailwest3 : [],
 	goldengate : [] 
     }
-    var minimal = {
-	interrailwest: ["picas", "pikachu"]
-
-    }
-
-    var rowsfetched = 0;
+    
+    
     
     async.auto({
 	'dbFetch': function(callback){
-	    console.log("b4 db");
 	    db.all("SELECT * from starts;", function(err,rows){
 		if(err){
 		    console.log("err");
@@ -30,66 +25,52 @@ router.get('/', function(req, res) {
 
 		for(var i=0; i< rows.length;i++){
 		    
-		console.log("FUNCTION CALL "+i);
-		startDate = rows[i].startDate
-		server = rows[i].server
-		announcementDate = rows[i].announcementDate
-		poster = rows[i].poster;
-		console.log("b4 switch");
-
-		switch(server){
-		case "Interrail West":
-		   
-		    console.log(rowsfetched);
-		    rowsfetched+=1;
-		    console.log(startDate);
-		    starts.interrailwest.push({
-			"start" : startDate,
-			"announcementDate" : announcementDate,
-			"poster" : poster
-		    });
-		    console.log("Interrail West");
-		    break;
+		    startDate = rows[i].startDate
+		    server = rows[i].server
+		    announcementDate = rows[i].announcementDate
+		    poster = rows[i].poster;
 		    
-		case "Interrail West 2":
-		    console.log("iw");
-		    rowsfetched+=1;
-		    starts.interrailwest2.push({
-			"start" : startDate,
-			"announcementDate" : announcementDate,
-			"poster" : poster
-		    });
-		    console.log("Interrail West 2");
-		    break;
-		    
-		case "Interrail West 3":
-
-
-		    rowsfetched+=1;
-		    console.log(rowsfetched);
-		    starts.interrailwest3.push({
-			"start" : startDate,
-			"announcementDate" : announcementDate,
-			"poster" : poster
-		    });
-		    console.log("Interrail West 3");
-		    break;
-		    
-		case "Golden Gate":
-		    rowsfetched+=1;
-		    console.log(rowsfetched);
-		    starts.goldengate.push({
-			"start" : startDate,
-			"announcementDate" : announcementDate,
-			"poster" : poster
-		    });
-		    console.log("Golden Gate");
-		    break;
-		    
-		default:
-		    console.log("ERROR: Server string not recognized!");
-		    break;
-		}
+		    switch(server){
+		    case "Interrail West":
+			starts.interrailwest.push({
+			    "start" : startDate,
+			    "announcementDate" : announcementDate,
+			    "poster" : poster
+			});
+			console.log("Interrail West data fetched");
+			break;
+			
+		    case "Interrail West 2":
+			starts.interrailwest2.push({
+			    "start" : startDate,
+			    "announcementDate" : announcementDate,
+			    "poster" : poster
+			});
+			console.log("Interrail West 2 data fetched");
+			break;
+			
+		    case "Interrail West 3":
+			starts.interrailwest3.push({
+			    "start" : startDate,
+			    "announcementDate" : announcementDate,
+			    "poster" : poster
+			});
+			console.log("Interrail West 3 data fetched");
+			break;
+			
+		    case "Golden Gate":
+			starts.goldengate.push({
+			    "start" : startDate,
+			    "announcementDate" : announcementDate,
+			    "poster" : poster
+			});
+			console.log("Golden Gate data fetched");
+			break;
+			
+		    default:
+			console.log("ERROR: Server string not recognized!");
+			break;
+		    }
 		}
 		callback();
 		
@@ -98,19 +79,18 @@ router.get('/', function(req, res) {
 	    });
 	},
 	'sendData': [
-
-	'dbFetch', function(callback){
 	    
-	    console.log(starts);
-	    var dateutils = require('date-utils');
-	    res.render('index', starts);
-	    callback();
+	    'dbFetch', function(callback){
+		
+		console.log(starts);
+		res.render('index', starts);
+		callback();
 	    }
 	]
-    
-    
-   
-    
+	
+	
+	
+	
     });
 });
 module.exports = router;

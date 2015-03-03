@@ -11,6 +11,7 @@ html
         body{ background-color: C0C0C0;}
         table{border: 1px solid #333; }
         th,td{border: 1px solid #666; padding: 0.5em; }
+        .currentera{font-weight: bold; background-color: #FF9933;}
     body
       - function parseDate(date, addDays){
       -   var parts = date.split("-");
@@ -23,7 +24,16 @@ html
       -   var dtStr = dt.getFullYear()+"-"+month+"-"+day;
       -   return dtStr;
       -}
-  
+      
+      - function isCurrentEra(date){
+      -   var parts = date.split("-");
+      -   var dt = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+      -   var nextdt = new Date(dt);
+      -   nextdt.setDate(dt.getDate()+14); //next era start
+      -   var currentDate = new Date();
+      -   if (dt < currentDate && nextdt > currentDate) return true;
+      -   else return false;
+      -}
      
       h3 Welcome to Rail Nation PT/BR server starts page!
       p Today is #{new Date()};
@@ -40,38 +50,123 @@ html
           th Endgame
         tr
           td Interrail West
-          td #{interrailwest[0].start}
-          td #{parseDate(interrailwest[0].start,14)}
-          td #{parseDate(interrailwest[0].start,28)}
-          td #{parseDate(interrailwest[0].start,42)}
-          td #{parseDate(interrailwest[0].start,56)}
-          td #{parseDate(interrailwest[0].start,70)}
-          td #{parseDate(interrailwest[0].start,84)}
+          if isCurrentEra(parseDate(interrailwest[0].start,0))
+            td(class="currentera") #{interrailwest[0].start}
+          else
+            td #{interrailwest[0].start}
+          if isCurrentEra(parseDate(interrailwest[0].start,14))
+            td(class="currentera") #{parseDate(interrailwest[0].start,14)}
+          else
+            td #{parseDate(interrailwest[0].start,14)}
+          if isCurrentEra(parseDate(interrailwest[0].start,28))
+            td(class="currentera") #{parseDate(interrailwest[0].start,28)}
+          else
+            td #{parseDate(interrailwest[0].start,28)}
+          if isCurrentEra(parseDate(interrailwest[0].start,42))
+            td(class="currentera") #{parseDate(interrailwest[0].start,42)}
+          else
+            td #{parseDate(interrailwest[0].start,42)}
+          if isCurrentEra(parseDate(interrailwest[0].start,56))
+            td(class="currentera") #{parseDate(interrailwest[0].start,56)}
+          else
+            td #{parseDate(interrailwest[0].start,56)}
+          if isCurrentEra(parseDate(interrailwest[0].start,70))
+            td(class="currentera") #{parseDate(interrailwest[0].start,70)}
+          else
+            td #{parseDate(interrailwest[0].start,70)}
+          if isCurrentEra(parseDate(interrailwest[0].start,84))
+            td(class="currentera") #{parseDate(interrailwest[0].start,84)}
+          else
+            td #{parseDate(interrailwest[0].start,84)}
         tr
           td Interrail West 2
-          td #{interrailwest2[0].start}
-          td #{parseDate(interrailwest2[0].start,14)}
-          td #{parseDate(interrailwest2[0].start,28)}
-          td #{parseDate(interrailwest2[0].start,42)}
-          td #{parseDate(interrailwest2[0].start,56)}
-          td #{parseDate(interrailwest2[0].start,70)}
-          td #{parseDate(interrailwest2[0].start,84)}
+          if isCurrentEra(parseDate(interrailwest2[0].start,0))
+            td(class="currentera") #{interrailwest2[0].start}
+          else
+            td #{interrailwest2[0].start}
+          if isCurrentEra(parseDate(interrailwest2[0].start,14))
+            td(class="currentera") #{parseDate(interrailwest2[0].start,14)}
+          else
+            td #{parseDate(interrailwest2[0].start,14)}
+          if isCurrentEra(parseDate(interrailwest2[0].start,28))
+            td(class="currentera") #{parseDate(interrailwest2[0].start,28)}
+          else
+            td #{parseDate(interrailwest2[0].start,28)}
+          if isCurrentEra(parseDate(interrailwest2[0].start,42))
+            td(class="currentera") #{parseDate(interrailwest2[0].start,42)}
+          else
+            td #{parseDate(interrailwest2[0].start,42)}
+          if isCurrentEra(parseDate(interrailwest2[0].start,56))
+            td(class="currentera") #{parseDate(interrailwest2[0].start,56)}
+          else
+            td #{parseDate(interrailwest2[0].start,56)}
+          if isCurrentEra(parseDate(interrailwest2[0].start,70))
+            td(class="currentera") #{parseDate(interrailwest2[0].start,70)}
+          else
+            td #{parseDate(interrailwest2[0].start,70)}
+          if isCurrentEra(parseDate(interrailwest2[0].start,84))
+            td(class="currentera") #{parseDate(interrailwest2[0].start,84)}
+          else
+            td #{parseDate(interrailwest2[0].start,84)}
+
         tr
           td Interrail West 3
-          td #{interrailwest3[0].start}
-          td #{parseDate(interrailwest3[0].start,14)}
-          td #{parseDate(interrailwest3[0].start,28)}
-          td #{parseDate(interrailwest3[0].start,42)}
-          td #{parseDate(interrailwest3[0].start,56)}
-          td #{parseDate(interrailwest3[0].start,70)}
-          td #{parseDate(interrailwest3[0].start,84)}
+          if isCurrentEra(parseDate(interrailwest3[0].start,0))
+            td(class="currentera") #{interrailwest3[0].start}
+          else
+            td #{interrailwest3[0].start}
+          if isCurrentEra(parseDate(interrailwest3[0].start,14))
+            td(class="currentera") #{parseDate(interrailwest3[0].start,14)}
+          else
+            td #{parseDate(interrailwest3[0].start,14)}
+          if isCurrentEra(parseDate(interrailwest3[0].start,28))
+            td(class="currentera") #{parseDate(interrailwest3[0].start,28)}
+          else
+            td #{parseDate(interrailwest3[0].start,28)}
+          if isCurrentEra(parseDate(interrailwest3[0].start,42))
+            td(class="currentera") #{parseDate(interrailwest3[0].start,42)}
+          else
+            td #{parseDate(interrailwest3[0].start,42)}
+          if isCurrentEra(parseDate(interrailwest3[0].start,56))
+            td(class="currentera") #{parseDate(interrailwest3[0].start,56)}
+          else
+            td #{parseDate(interrailwest3[0].start,56)}
+          if isCurrentEra(parseDate(interrailwest3[0].start,70))
+            td(class="currentera") #{parseDate(interrailwest3[0].start,70)}
+          else
+            td #{parseDate(interrailwest3[0].start,70)}
+          if isCurrentEra(parseDate(interrailwest3[0].start,84))
+            td(class="currentera") #{parseDate(interrailwest3[0].start,84)}
+          else
+            td #{parseDate(interrailwest3[0].start,84)}
 
         tr
           td Golden Gate
-          td #{goldengate[0].start}
-          td #{parseDate(goldengate[0].start,14)}
-          td #{parseDate(goldengate[0].start,28)}
-          td #{parseDate(goldengate[0].start,42)}
-          td #{parseDate(goldengate[0].start,56)}
-          td #{parseDate(goldengate[0].start,70)}
-          td #{parseDate(goldengate[0].start,84)}
+          if isCurrentEra(parseDate(goldengate[0].start,0))
+            td(class="currentera") #{goldengate[0].start}
+          else
+            td #{interrailwest[0].start}
+          if isCurrentEra(parseDate(goldengate[0].start,14))
+            td(class="currentera") #{parseDate(goldengate[0].start,14)}
+          else
+            td #{parseDate(goldengate[0].start,14)}
+          if isCurrentEra(parseDate(goldengate[0].start,28))
+            td(class="currentera") #{parseDate(goldengate[0].start,28)}
+          else
+            td #{parseDate(goldengate[0].start,28)}
+          if isCurrentEra(parseDate(goldengate[0].start,42))
+            td(class="currentera") #{parseDate(goldengate[0].start,42)}
+          else
+            td #{parseDate(goldengate[0].start,42)}
+          if isCurrentEra(parseDate(goldengate[0].start,56))
+            td(class="currentera") #{parseDate(goldengate[0].start,56)}
+          else
+            td #{parseDate(interrailwest[0].start,56)}
+          if isCurrentEra(parseDate(goldengate[0].start,70))
+            td(class="currentera") #{parseDate(goldengate[0].start,70)}
+          else
+            td #{parseDate(goldengate[0].start,70)}
+          if isCurrentEra(parseDate(goldengate[0].start,84))
+            td(class="currentera") #{parseDate(goldengate[0].start,84)}
+          else
+            td #{parseDate(goldengate[0].start,84)}
