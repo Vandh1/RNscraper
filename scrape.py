@@ -107,7 +107,7 @@ def convertDate(serverDate):
 
 
 def writeToDB():
-    conn = sqlite3.connect('serverStarts.db');
+    conn = sqlite3.connect('/home/pedro/RNScraper/serverStarts.db');
     c = conn.cursor();
     c.execute('''CREATE TABLE IF NOT EXISTS starts (server TEXT PRIMARY KEY, startDate DATE, poster TEXT, announcementDate DATETIME)''');
 
@@ -129,12 +129,12 @@ def writeToDB():
             (year, month, day) = match.group(1,2,3);
             dbDate = date(int(year),int(month),int(day));
             if dbDate < serverDate:
-                c.execute("UPDATE starts SET startDate = ?, poster = ?, announcementDate = ? WHERE server = ?",(startDate, startPostData[0], announcementDate, server));
+                c.execute("UPDATE starts SET startDate = ?, poster = ?, announcementDate = ? WHERE server = ?",(serverDate, startPostData[0], announcementDate, server));
                 if logging:
                     log.write(currentDate.strftime("%Y-%m-%d %H:%M:%S")+" Updated start time for "+server+" "+str(serverDate)+"\n");
             else:
                 if logging:
-                    log.write(currentDate.strftime("%Y-%m-%d %H:%M:%S")+" DB already has the latest start date, nothing to do for "+server+"\n");
+                    log.write(currentDate.strftime("%Y-%m-%d %H:%M:%S")+" DB date is "+str(dbDate)+", server date is "+str(serverDate)+". DB already has the latest start date, nothing to do for "+server+".\n");
     conn.commit();
     conn.close();
 

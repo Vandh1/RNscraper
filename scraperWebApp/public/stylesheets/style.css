@@ -1,8 +1,11 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-a {
-  color: #00B7FF;
-}
+body{ background-color: #F7ECEC; font-family: sans-serif;}
+table{border: 1px solid #333; border-radius: 10px; margin-left: auto; margin-right: auto;}
+td{font-weight: normal; font-size: 100%}
+th{text-align: center;}
+.currentera,.nextCC{font-weight: bold; background-color: #3399FF !important;}
+th:nth-child(even),td:nth-child(even){border: 1px solid #666; padding: 0.5em; border: 0px;}
+th:nth-child(odd),td:nth-child(odd){border: 1px solid #666; padding: 0.5em; border: 0px;}
+tr:nth-child(even){background: #DCDCDC;}
+tr:nth-child(odd){background: #C0C0C0;}
+h3,p{text-align:right;}
+.today{font-weight: bold; background-color: #66CC00; !important;}
